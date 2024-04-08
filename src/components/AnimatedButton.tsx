@@ -39,6 +39,7 @@ export const AnimatedButton = ({ title, bg, onPress }: Props) => {
   return (
     <Pressable
       flex={1}
+      style={{flex:1}}
       onPressIn={() => {
         pressing.value = withTiming(1, {
           easing: Easing.linear,

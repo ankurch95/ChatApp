@@ -4,11 +4,12 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import { AuthScreen, SplashScreen } from '../screens';
+import { AuthScreen, SplashScreen,ChatScreen } from '../screens';
 
 export type AppStackParamList = {
     AuthScreen: undefined;
-    SplashScreen: undefined
+    SplashScreen: undefined,
+    ChatScreen:undefined
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
@@ -27,7 +28,7 @@ export const AppStackNavigator = () => {
         >
             <Stack.Screen name="SplashScreen" component={SplashScreen} />
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
-
+            <Stack.Screen name="ChatScreen" component={ChatScreen} />
             {/* <Stack.Group>
                 <Stack.Screen
                     name="BlankCanvas"

@@ -3,26 +3,24 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#EEF1FF",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 12,
-        width: "100%",
+        backgroundColor: "#fff",
     },
-    loginheading: {
+    loginHeading: {
         fontSize: 26,
         marginBottom: 10,
+        fontWeight:'bold'
     },
-    logininputContainer: {
+    loginInputContainer: {
         width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
+        height: 60,
+        marginTop:50
     },
-    logininput: {
+    loginInput: {
         borderWidth: 1,
-        width: "90%",
+        flex: 1,
         padding: 8,
-        borderRadius: 2,
+        borderRadius: 5,
+        marginBottom: 20
     },
     loginbutton: {
         backgroundColor: "green",
