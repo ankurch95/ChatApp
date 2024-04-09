@@ -1,86 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
-// import ChatComponent from "../component/ChatComponent";
 import { styles } from "./styles";
+import ChatComponent from "../../components/ChatCard";
+import { Typography } from "../../components";
+import { chatData } from "../../utils";
+import Modal from "../../components/Modal";
 
 
 export const ChatScreen = () => {
-
-    //👇🏻 Dummy list of rooms
-    const rooms = [
-        {
-            id: "1",
-            name: "Novu Hangouts",
-            messages: [
-                {
-                    id: "1a",
-                    text: "Hello guys, welcome!",
-                    time: "07:50",
-                    user: "Tomer",
-                },
-                {
-                    id: "1b",
-                    text: "Hi Tomer, thank you! 😇",
-                    time: "08:50",
-                    user: "David",
-                },
-            ],
-        },
-        {
-            id: "2",
-            name: "Hacksquad Team 1",
-            messages: [
-                {
-                    id: "2a",
-                    text: "Guys, who's awake? 🙏🏽",
-                    time: "12:50",
-                    user: "Team Leader",
-                },
-                {
-                    id: "2b",
-                    text: "What's up? 🧑🏻‍💻",
-                    time: "03:50",
-                    user: "Victoria",
-                },
-            ],
-        },
-    ];
+    const [visible, setVisible] = useState<boolean>(false);
 
     return (
         <SafeAreaView style={styles.chatScreen}>
             <View style={styles.chatTopContainer}>
                 <View style={styles.chatHeader}>
-                    <Text style={styles.chatHeading}>Chats</Text>
-
-                    {/* 👇🏻 Logs "ButtonPressed" to the console when the icon is clicked */}
-                    <Pressable onPress={() => console.log("Button Pressed!")}>
-                        {/* <Feather name='edit' size={24} color='green' /> */}
-                    </Pressable>
+                    <Typography
+                        variant={"subtitle1"}>
+                        Chats
+                    </Typography>
+                    <Typography
+                        variant={"body"}
+                        onPress={() => setVisible(true)}>
+                        New Chat
+                    </Typography>
                 </View>
             </View>
 
             <View style={styles.chatListContainer}>
-                {rooms.length > 0 ? (
+                {chatData.length > 0 ? (
                     <FlatList
-                        data={rooms}
-                        renderItem={({ item }) => {return (
-                            <Pressable style={styles.cchat} >
-                                <View style={styles.crightContainer}>
-                                    <View>
-                                        <Text style={styles.cusername}>{item.name}</Text>
-
-                                        <Text style={styles.cmessage}>
-                                            {item.messages[item.messages.length - 1]?.text ? item.messages[item.messages.length - 1].text : "Tap to start chatting"}
-                                        </Text>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.ctime}>
-                                            {item.messages[item.messages.length - 1]?.time ? item.messages[item.messages.length - 1].time : "now"}
-                                        </Text>
-                                    </View>
-                                </View>
-                            </Pressable>)}
-                        }
+                        data={chatData}
+                        renderItem={({ item }) => <ChatComponent item={item} />}
                         keyExtractor={(item) => item.id}
                     />
                 ) : (
@@ -90,6 +40,7 @@ export const ChatScreen = () => {
                     </View>
                 )}
             </View>
+            {visible ? <Modal setVisible={setVisible} /> : ""}
         </SafeAreaView>
     );
 };

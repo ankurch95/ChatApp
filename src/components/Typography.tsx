@@ -20,43 +20,48 @@ type TypographyProps = {
 
 const typographyMap: Record<
   Variant,
-  Pick<ComponentProps<typeof Text>, 'lineHeight' | 'fontSize'>
+  Pick<ComponentProps<typeof Text>, 'lineHeight' | 'fontSize'|'fontWeight'>
 > = {
   bigTitle: {
     fontSize: '6xl',
-    lineHeight: 35,
+    fontWeight: "bold"
+    // lineHeight: 35,
   },
   title: {
     fontSize: '4xl',
-    lineHeight: 30,
+    fontWeight: "bold"
+    // lineHeight: 30,
+
   },
   bigText: {
     fontSize: '2xl',
-    lineHeight: 25,
+    fontWeight: "bold"
+    // lineHeight: 25,
   },
   subtitle1: {
     fontSize: 'xl',
-    lineHeight: 23,
+    fontWeight: "bold"
+    // lineHeight: 23,
   },
   subtitle2: {
     fontSize: 'lg',
-    lineHeight: 21,
+    // lineHeight: 21,
   },
   body: {
     fontSize: 'md',
-    lineHeight: 18,
+    // lineHeight: 18,
   },
   info: {
     fontSize: 'sm',
-    lineHeight: 16,
+    // lineHeight: 16,
   },
   description: {
     fontSize: 'xs',
-    lineHeight: 14,
+    // lineHeight: 14,
   },
   caption: {
     fontSize: '2xs',
-    lineHeight: 12,
+    // lineHeight: 12,
   },
 };
 
