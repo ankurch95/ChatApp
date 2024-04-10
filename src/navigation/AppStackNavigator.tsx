@@ -4,12 +4,16 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import { AuthScreen, SplashScreen,ChatScreen } from '../screens';
+import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen } from '../screens';
 
 export type AppStackParamList = {
     AuthScreen: undefined;
     SplashScreen: undefined,
-    ChatScreen:undefined
+    ChatScreen: undefined,
+    ChatDetailScreen: {
+        id: string,
+        name: string,
+    }
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
@@ -29,18 +33,7 @@ export const AppStackNavigator = () => {
             <Stack.Screen name="SplashScreen" component={SplashScreen} />
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
             <Stack.Screen name="ChatScreen" component={ChatScreen} />
-            {/* <Stack.Group>
-                <Stack.Screen
-                    name="BlankCanvas"
-                    component={BlankCanvas}
-                    options={{ presentation: 'containedModal' }}
-                />
-                <Stack.Screen
-                    name="Help"
-                    component={Help}
-                    options={{ presentation: 'modal' }}
-                />
-            </Stack.Group> */}
+            <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} />
         </Stack.Navigator>
     );
 };

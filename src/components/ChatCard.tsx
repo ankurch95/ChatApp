@@ -12,7 +12,7 @@ const ChatComponent = ({ item }: any) => {
     }, []);
 
     const handleNavigation = () => {
-        navigation.navigate("Messaging", {
+        navigation.navigate("ChatDetailScreen", {
             id: item.id,
             name: item.name,
         });

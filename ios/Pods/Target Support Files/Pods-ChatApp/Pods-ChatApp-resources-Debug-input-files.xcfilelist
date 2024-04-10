@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-ChatApp/Pods-ChatApp-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/React-Core/RCTI18nStrings.bundle
