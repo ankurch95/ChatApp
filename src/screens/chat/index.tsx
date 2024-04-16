@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
 import { styles } from "./styles";
 import ChatComponent from "../../components/ChatCard";
 import { Typography } from "../../components";
 import { chatData } from "../../utils";
 import Modal from "../../components/Modal";
+import socket from "../../utils/socket";
 
 
 export const ChatScreen = () => {
     const [visible, setVisible] = useState<boolean>(false);
+    const [rooms, setRooms] = useState([]);
+
+    useLayoutEffect(() => {
+		fetchGroups();
+	}, []);
+
+
+    const fetchGroups=()=> {
+        fetch("http://localhost:4000/api")
+            .then((res) => res.json())
+            .then((data) => setRooms(data))
+            .catch((err) => console.error(err));
+    }
+
+    useEffect(() => {
+		socket.on("roomsList", (rooms: React.SetStateAction<never[]>) => {
+			setRooms(rooms);
+		});
+	}, [socket]);
 
     return (
         <SafeAreaView style={styles.chatScreen}>
@@ -27,9 +47,9 @@ export const ChatScreen = () => {
             </View>
 
             <View style={styles.chatListContainer}>
-                {chatData.length > 0 ? (
+                {rooms.length > 0 ? (
                     <FlatList
-                        data={chatData}
+                        data={rooms}
                         renderItem={({ item }) => <ChatComponent item={item} />}
                         keyExtractor={(item) => item.id}
                     />

@@ -4,6 +4,7 @@ import { AnimatedButton } from "./AnimatedButton";
 import { Typography } from "./Typography";
 import { Toast } from "./Toast";
 import { useToast } from 'native-base';
+import {socket} from "../utils";
 
 const Modal = ({ setVisible }: any) => {
     const [groupName, setGroupName] = useState<string>("");
@@ -25,6 +26,8 @@ const Modal = ({ setVisible }: any) => {
                 placement: 'top',
             });
             return
+        }else{
+            socket.emit('createRoom',groupName)
         }
         closeModal();
     };
