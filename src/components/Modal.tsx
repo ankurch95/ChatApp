@@ -4,9 +4,9 @@ import { AnimatedButton } from "./AnimatedButton";
 import { Typography } from "./Typography";
 import { Toast } from "./Toast";
 import { useToast } from 'native-base';
-import {socket} from "../utils";
+import socket from "../utils/socket";
 
-const Modal = ({ setVisible }: any) => {
+const CreateGroupModal = ({ setVisible }: any) => {
     const [groupName, setGroupName] = useState<string>("");
     const toast = useToast();
     const closeModal = () => setVisible(false);
@@ -60,7 +60,7 @@ const Modal = ({ setVisible }: any) => {
     );
 };
 
-export default Modal;
+export default CreateGroupModal;
 
 const styles = StyleSheet.create({
     modalContainer: {

@@ -45,10 +45,12 @@ const typographyMap: Record<
   },
   subtitle2: {
     fontSize: 'lg',
+    fontWeight: "bold"
     // lineHeight: 21,
   },
   body: {
     fontSize: 'md',
+    fontWeight: "normal"
     // lineHeight: 18,
   },
   info: {

@@ -4,8 +4,8 @@ import { styles } from "./styles";
 import ChatComponent from "../../components/ChatCard";
 import { Typography } from "../../components";
 import { chatData } from "../../utils";
-import Modal from "../../components/Modal";
 import socket from "../../utils/socket";
+import CreateGroupModal from "../../components/Modal";
 
 
 export const ChatScreen = () => {
@@ -35,7 +35,7 @@ export const ChatScreen = () => {
             <View style={styles.chatTopContainer}>
                 <View style={styles.chatHeader}>
                     <Typography
-                        variant={"subtitle1"}>
+                        variant={"bigText"}>
                         Chats
                     </Typography>
                     <Typography
@@ -60,7 +60,7 @@ export const ChatScreen = () => {
                     </View>
                 )}
             </View>
-            {visible ? <Modal setVisible={setVisible} /> : ""}
+            {visible ? <CreateGroupModal setVisible={setVisible} /> : ""}
         </SafeAreaView>
     );
 };

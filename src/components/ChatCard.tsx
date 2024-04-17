@@ -23,7 +23,7 @@ const ChatComponent = ({ item }: any) => {
             <View style={styles.rightContainer}>
                 <View>
                     <Typography
-                        variant="subtitle1">
+                        variant="subtitle2">
                         {item.name}
                     </Typography>
 

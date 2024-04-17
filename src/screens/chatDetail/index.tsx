@@ -1,33 +1,18 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { View, TextInput, Text, FlatList, Pressable, SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./styles";
 import { AppStackScreenProps } from "../../navigation/AppStackNavigator";
 import MessageComponent from "../../components/MessageComponent";
-import { AnimatedButton } from "../../components";
+import { AnimatedButton, Header } from "../../components";
+import socket from "../../utils/socket";
 
 export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'AuthScreen'>) => {
-    const [chatMessages, setChatMessages] = useState([
-        {
-            id: "1",
-            text: "Hello guys, welcome!",
-            time: "07:50",
-            user: "Tomer",
-        },
-        {
-            id: "2",
-            text: "Hi Tomer, thank you! 😇",
-            time: "08:50",
-            user: "David",
-        },
-    ]);
+    const [chatMessages, setChatMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [user, setUser] = useState("");
-
-    //👇🏻 Access the chatroom's name and id
     const { name, id } = route.params;
 
-    //👇🏻 This function gets the username saved on AsyncStorage
     const getUsername = async () => {
         try {
             const value = await AsyncStorage.getItem("username");
@@ -39,16 +24,18 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
         }
     };
 
-    //👇🏻 Sets the header title to the name chatroom's name
     useLayoutEffect(() => {
         navigation.setOptions({ title: name });
         getUsername()
+        socket.emit("findRoom", id);
+        socket.on("foundRoom", (roomChats: React.SetStateAction<never[]>) => setChatMessages(roomChats));
     }, []);
 
-    /*👇🏻 
-        This function gets the time the user sends a message, then 
-        logs the username, message, and the timestamp to the console.
-     */
+
+    useEffect(() => {
+        socket.on("foundRoom", (roomChats: React.SetStateAction<never[]>) => setChatMessages(roomChats));
+    }, [socket]);
+
     const handleNewMessage = () => {
         const hour =
             new Date().getHours() < 10
@@ -60,15 +47,20 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
                 ? `0${new Date().getMinutes()}`
                 : `${new Date().getMinutes()}`;
 
-        console.log({
-            message,
-            user,
-            timestamp: { hour, mins },
-        });
+        if (user) {
+            socket.emit("newMessage", {
+                message,
+                room_id: id,
+                user,
+                timestamp: { hour, mins },
+            });
+        }
     };
 
     return (
         <SafeAreaView style={styles.container}>
+            <Header
+                title={name} />
             <View style={styles.messagingScreen}>
                 <View
                     style={[

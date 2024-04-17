@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     },
     messagingScreen: {
         flex: 1,
+        backgroundColor: '#F7F7F7'
     },
     messagingInputContainer: {
         width: "100%",
