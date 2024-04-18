@@ -5,15 +5,23 @@ import {
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
 import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen } from '../screens';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ProfileScreen } from '../screens/profile';
+import { CustomIcon } from '../components';
 
 export type AppStackParamList = {
     AuthScreen: undefined;
     SplashScreen: undefined,
-    ChatScreen: undefined,
+    Home: undefined,
     ChatDetailScreen: {
         id: string,
         name: string,
     }
+};
+
+export type TabStackParamList = {
+    ChatScreen: undefined,
+    ProfileScreen: undefined
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
@@ -22,6 +30,35 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> =
     NativeStackScreenProps<AppStackParamList, T>;
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
+const Tab = createBottomTabNavigator<TabStackParamList>();
+
+const Home = () => {
+    return (
+        <Tab.Navigator
+            screenOptions={{ 
+                headerShown: false ,
+                tabBarActiveTintColor:'blue',
+                tabBarInactiveTintColor:'gray'
+            }}>
+            <Tab.Screen
+                options={{
+                    tabBarLabel: 'Chats',
+                    tabBarIcon:({focused})  => <CustomIcon name='chat' size={6} color={focused?'blue.700':'gray.500'} />
+                }}
+
+                name="ChatScreen"
+                component={ChatScreen} />
+            <Tab.Screen
+                options={{
+                    tabBarLabel: 'Profile',
+                    tabBarIcon:({focused}) => <CustomIcon name='account' size={7} color={focused?'blue.700':'gray.500'} />
+                }}
+                name="ProfileScreen"
+                component={ProfileScreen} />
+        </Tab.Navigator>
+    );
+}
+
 
 export const AppStackNavigator = () => {
     return (
@@ -32,7 +69,7 @@ export const AppStackNavigator = () => {
         >
             <Stack.Screen name="SplashScreen" component={SplashScreen} />
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
-            <Stack.Screen name="ChatScreen" component={ChatScreen} />
+            <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} />
         </Stack.Navigator>
     );

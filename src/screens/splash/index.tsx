@@ -18,7 +18,7 @@ export const SplashScreen = ({
         try {
             const value = await AsyncStorage.getItem("username");
             if (value !== null) {
-                navigation.navigate("ChatScreen");
+                navigation.navigate("Home");
             } else {
                 navigation.navigate("AuthScreen");
             }
