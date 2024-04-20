@@ -37,27 +37,27 @@ const Home = () => {
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: 'blue',
+                tabBarActiveTintColor: '#2563eb',
                 tabBarInactiveTintColor: 'gray'
             }}>
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Updates',
-                    tabBarIcon: ({ focused }) => <CustomIcon name='update' size={6} color={focused ? 'blue.700' : 'gray.500'} />
+                    tabBarIcon: ({ focused }) => <CustomIcon name='update' size={6} color={focused ? 'blue.600' : 'gray.500'} />
                 }}
                 name="UpdateScreen"
                 component={UpdateScreen} />
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Chats',
-                    tabBarIcon: ({ focused }) => <CustomIcon name='chat' size={6} color={focused ? 'blue.700' : 'gray.500'} />
+                    tabBarIcon: ({ focused }) => <CustomIcon name='chat' size={6} color={focused ? 'blue.600' : 'gray.500'} />
                 }}
                 name="ChatScreen"
                 component={ChatScreen} />
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Profile',
-                    tabBarIcon: ({ focused }) => <CustomIcon name='account' size={7} color={focused ? 'blue.700' : 'gray.500'} />
+                    tabBarIcon: ({ focused }) => <CustomIcon name='account' size={7} color={focused ? 'blue.600' : 'gray.500'} />
                 }}
                 name="ProfileScreen"
                 component={ProfileScreen} />

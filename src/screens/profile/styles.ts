@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         width: "100%",
         padding: 20,
         justifyContent: "center",
-        marginBottom: 15,
+        // marginBottom: 15,
         elevation: 2,
     },
     header: {

@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { Center, Pressable } from 'native-base';
+import { Center, Pressable, Text } from 'native-base';
 import { Typography } from './Typography';
 import Animated, {
   useSharedValue,
@@ -22,6 +22,7 @@ export const AnimatedButton = ({ title, bg, onPress }: Props) => {
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
+      height: 55,
       transform: [
         {
           scale: interpolate(
@@ -39,7 +40,7 @@ export const AnimatedButton = ({ title, bg, onPress }: Props) => {
   return (
     <Pressable
       flex={1}
-      style={{flex:1}}
+      style={{ flex: 1 }}
       onPressIn={() => {
         pressing.value = withTiming(1, {
           easing: Easing.linear,
@@ -50,7 +51,7 @@ export const AnimatedButton = ({ title, bg, onPress }: Props) => {
       }}
       onPress={onPress}
     >
-      <AnimatedCenter bg={bg} p={4} borderRadius={16} style={animatedStyle}>
+      <AnimatedCenter bg={bg} borderRadius={16} style={animatedStyle}>
         <Typography variant="subtitle2" color="gray.100">
           {title}
         </Typography>

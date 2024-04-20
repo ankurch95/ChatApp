@@ -3,7 +3,7 @@ import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import ChatComponent from "../../components/ChatCard";
-import { Typography } from "../../components";
+import { AnimatedButton, CustomIcon, Typography } from "../../components";
 import socket from "../../utils/socket";
 import CreateGroupModal from "../../components/Modal";
 
@@ -38,11 +38,7 @@ export const ChatScreen = () => {
                         variant={"bigText"}>
                         Chats
                     </Typography>
-                    <Typography
-                        variant={"body"}
-                        onPress={() => setVisible(true)}>
-                        New Chat
-                    </Typography>
+                    <CustomIcon name="plus-circle" size={30} color={'blue.600'}/>
                 </View>
             </View>
 
@@ -61,8 +57,17 @@ export const ChatScreen = () => {
                         </Typography>
                         <Typography
                             variant="body">
-                           Click the icon above to create a Chat room
+                            Click the icon above to create a Chat room
                         </Typography>
+                        <View style={{width:'100%',height:60,marginTop:20
+
+                        }}>
+                        <AnimatedButton
+                            title='Create Room'
+                            bg={'blue.600'}
+                            onPress={() => setVisible(true)}
+                        />
+                        </View>
                     </View>
                 )}
             </View>
