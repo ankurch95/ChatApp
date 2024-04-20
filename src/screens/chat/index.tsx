@@ -1,9 +1,9 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import ChatComponent from "../../components/ChatCard";
 import { Typography } from "../../components";
-import { chatData } from "../../utils";
 import socket from "../../utils/socket";
 import CreateGroupModal from "../../components/Modal";
 
@@ -13,11 +13,11 @@ export const ChatScreen = () => {
     const [rooms, setRooms] = useState([]);
 
     useLayoutEffect(() => {
-		fetchGroups();
-	}, []);
+        fetchGroups();
+    }, []);
 
 
-    const fetchGroups=()=> {
+    const fetchGroups = () => {
         fetch("http://localhost:4000/api")
             .then((res) => res.json())
             .then((data) => setRooms(data))
@@ -25,10 +25,10 @@ export const ChatScreen = () => {
     }
 
     useEffect(() => {
-		socket.on("roomsList", (rooms: React.SetStateAction<never[]>) => {
-			setRooms(rooms);
-		});
-	}, [socket]);
+        socket.on("roomsList", (rooms: React.SetStateAction<never[]>) => {
+            setRooms(rooms);
+        });
+    }, [socket]);
 
     return (
         <SafeAreaView style={styles.chatScreen}>
@@ -55,8 +55,14 @@ export const ChatScreen = () => {
                     />
                 ) : (
                     <View style={styles.chatEmptyContainer}>
-                        <Text style={styles.chatEmptyText}>No rooms created!</Text>
-                        <Text>Click the icon above to create a Chat room</Text>
+                        <Typography
+                            variant="bigText">
+                            No rooms created!
+                        </Typography>
+                        <Typography
+                            variant="body">
+                           Click the icon above to create a Chat room
+                        </Typography>
                     </View>
                 )}
             </View>

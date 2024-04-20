@@ -4,9 +4,8 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen } from '../screens';
+import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen, ProfileScreen, UpdateScreen } from '../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ProfileScreen } from '../screens/profile';
 import { CustomIcon } from '../components';
 
 export type AppStackParamList = {
@@ -21,7 +20,8 @@ export type AppStackParamList = {
 
 export type TabStackParamList = {
     ChatScreen: undefined,
-    ProfileScreen: undefined
+    ProfileScreen: undefined,
+    UpdateScreen:undefined
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
@@ -35,23 +35,29 @@ const Tab = createBottomTabNavigator<TabStackParamList>();
 const Home = () => {
     return (
         <Tab.Navigator
-            screenOptions={{ 
-                headerShown: false ,
-                tabBarActiveTintColor:'blue',
-                tabBarInactiveTintColor:'gray'
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: 'blue',
+                tabBarInactiveTintColor: 'gray'
             }}>
             <Tab.Screen
                 options={{
-                    tabBarLabel: 'Chats',
-                    tabBarIcon:({focused})  => <CustomIcon name='chat' size={6} color={focused?'blue.700':'gray.500'} />
+                    tabBarLabel: 'Updates',
+                    tabBarIcon: ({ focused }) => <CustomIcon name='update' size={6} color={focused ? 'blue.700' : 'gray.500'} />
                 }}
-
+                name="UpdateScreen"
+                component={UpdateScreen} />
+            <Tab.Screen
+                options={{
+                    tabBarLabel: 'Chats',
+                    tabBarIcon: ({ focused }) => <CustomIcon name='chat' size={6} color={focused ? 'blue.700' : 'gray.500'} />
+                }}
                 name="ChatScreen"
                 component={ChatScreen} />
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Profile',
-                    tabBarIcon:({focused}) => <CustomIcon name='account' size={7} color={focused?'blue.700':'gray.500'} />
+                    tabBarIcon: ({ focused }) => <CustomIcon name='account' size={7} color={focused ? 'blue.700' : 'gray.500'} />
                 }}
                 name="ProfileScreen"
                 component={ProfileScreen} />
