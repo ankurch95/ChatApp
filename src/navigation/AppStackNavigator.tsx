@@ -21,7 +21,7 @@ export type AppStackParamList = {
 export type TabStackParamList = {
     ChatScreen: undefined,
     ProfileScreen: undefined,
-    UpdateScreen:undefined
+    UpdateScreen: undefined
 };
 
 export type AppStackNavigationProp<T extends keyof AppStackParamList> =
@@ -35,6 +35,7 @@ const Tab = createBottomTabNavigator<TabStackParamList>();
 const Home = () => {
     return (
         <Tab.Navigator
+            initialRouteName='ChatScreen'
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: '#2563eb',

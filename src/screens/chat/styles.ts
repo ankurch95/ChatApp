@@ -33,7 +33,52 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    chatEmptyText: { fontWeight: "bold", fontSize: 24, paddingBottom: 30 },
+    chatEmptyText: {
+        fontWeight: "bold",
+        fontSize: 24,
+        paddingBottom: 30
+    },
+    bottomSheetContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    modalContainer: {
+        width: "100%",
+        borderTopColor: "#ddd",
+        borderTopWidth: 1,
+        elevation: 1,
+        height: 400,
+        backgroundColor: "#fff",
+        position: "absolute",
+        bottom: 0,
+        zIndex: 10,
+        paddingVertical: 50,
+        paddingHorizontal: 20,
+    },
+    modalInput: {
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 15,
+        marginVertical: 15
+    },
+    modalSubHeading: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 15,
+        textAlign: "center",
+    },
+
+    modalButtonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10,
+        height: 60
+
+    },
     messagingscreen: {
         flex: 1,
     },
@@ -59,10 +104,10 @@ export const styles = StyleSheet.create({
         borderRadius: 3,
         alignItems: "center",
         justifyContent: "center",
-       
+
     },
-   
-   
+
+
     mmessageWrapper: {
         width: "100%",
         alignItems: "flex-start",
@@ -78,11 +123,11 @@ export const styles = StyleSheet.create({
     mvatar: {
         marginRight: 5,
     },
-    
+
     cavatar: {
         marginRight: 15,
     },
-    
-   
-   
+
+
+
 });
