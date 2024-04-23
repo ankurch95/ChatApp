@@ -1,21 +1,45 @@
-import { View, Text, ScrollView, Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, ScrollView, Share, Pressable } from 'react-native'
+import React, { useCallback, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from './styles'
 import { CustomIcon, Typography } from '../../components'
-import { VStack, Box, Divider, Card } from 'native-base';
+import { Box, Divider } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 export const ProfileScreen = () => {
+  const navigation = useNavigation()
   const [username, setUsername] = useState<string | null>('')
+  const [about, setAbout] = useState<string>('')
 
-  useEffect(() => {
-    getUserDetail()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      const unsubscribe = getUserDetail()
+      return () => unsubscribe;
+    }, [])
+  );
+
 
   const getUserDetail = async () => {
     let user: string | null = await AsyncStorage.getItem('username')
+    let about: string | any = await AsyncStorage.getItem('about')
     setUsername(user)
+    setAbout(about)
+  }
+
+  const shareApp = () => {
+    Share.share({
+      title: 'Some Title',
+      message: 'URL',
+      url: 'App URL'
+    }, { dialogTitle: "Android Title" })
+      .then(({ action, activityType }) => {
+        if (action === Share.sharedAction)
+          console.log('Share was successful');
+        else
+          console.log('Share was dismissed');
+      })
+      .catch(err => console.log(err))
   }
 
   return (
@@ -38,7 +62,7 @@ export const ProfileScreen = () => {
           padding={3}>
 
           <View style={{ flexDirection: 'row' }}>
-            <View style={{ height: 60, width: 60, borderRadius: 60 / 2, borderColor: 'grey', borderWidth: 1,alignItems:'center',justifyContent:'center' }}>
+            <View style={{ height: 60, width: 60, borderRadius: 60 / 2, borderColor: 'grey', borderWidth: 1, alignItems: 'center', justifyContent: 'center' }}>
               {/* <Image
                 source={{ uri: "https://wallpaperaccess.com/full/317501.jpg" }}
                 style={{ height: 60, width: 60, borderRadius: 60 / 2 }}
@@ -47,16 +71,20 @@ export const ProfileScreen = () => {
                 name='camera-outline' color={'grey'} size={7} />
             </View>
             <View style={{ marginLeft: 20 }}>
-              <Typography variant='bigText'>
+              <Typography
+                variant='bigText'
+                numberOfLines={2}>
                 {username}
               </Typography>
               <Typography variant='info'>
-                Add About
+                {about != null ? about : 'Add About'}
               </Typography>
             </View>
           </View>
           <Divider marginY={3} />
-          <View style={{ flexDirection: 'row' }}>
+          <Pressable
+            style={{ flexDirection: 'row' }}
+            onPress={() => navigation.navigate('EditProfileScreen')}>
             <CustomIcon
               name='pencil' color={'black'} size={5} />
             <View style={{ marginLeft: 15 }}>
@@ -64,7 +92,7 @@ export const ProfileScreen = () => {
                 Edit Profile
               </Typography>
             </View>
-          </View>
+          </Pressable>
         </Box>
 
 
@@ -122,7 +150,9 @@ export const ProfileScreen = () => {
             </View>
           </View>
           <Divider marginY={3} />
-          <View style={{ flexDirection: 'row' }}>
+          <Pressable
+            style={{ flexDirection: 'row' }}
+            onPress={shareApp}>
             <CustomIcon
               name='share-variant' color={'black'} size={5} />
             <View style={{ marginLeft: 15 }}>
@@ -130,7 +160,7 @@ export const ProfileScreen = () => {
                 Share
               </Typography>
             </View>
-          </View>
+          </Pressable>
         </Box>
       </ScrollView>
     </SafeAreaView>

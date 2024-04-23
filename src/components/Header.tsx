@@ -2,6 +2,8 @@ import React from 'react';
 import { VStack, HStack, Center } from 'native-base';
 import { Typography } from './Typography';
 import { useNavigation } from '@react-navigation/native';
+import { CustomIcon } from './CustomIcon';
+import { View } from 'react-native';
 
 interface HeaderProps {
     variant?: 'left' | 'center';
@@ -19,16 +21,16 @@ export const Header = ({
     const navigation = useNavigation();
 
     return (
-        <VStack space={3} style={{elevation:20,paddingVertical:15}}>
-            <HStack space={2.5} alignItems="center">
+        <VStack space={3} style={{ elevation: 20, paddingVertical: 15 }}>
+            <HStack space={3.5} alignItems="center">
                 {hasBackButton && (
-                    <Typography
-                        bold
-                        variant="info"
-                        style={{ paddingLeft: 20 }}
-                        onPress={navigation.goBack}>
-                        Back
-                    </Typography>
+                    <View style={{marginHorizontal:20}}>
+                    <CustomIcon
+                        name='arrow-left'
+                        color={'black'}
+                        size={6}
+                        onPress={navigation.goBack} />
+                        </View>
                 )}
                 {variant === 'center' ? (
                     <Typography bold variant="title">

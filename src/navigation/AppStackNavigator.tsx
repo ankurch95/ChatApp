@@ -4,7 +4,7 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen, ProfileScreen, UpdateScreen } from '../screens';
+import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen, ProfileScreen, UpdateScreen, EditProfileScreen } from '../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CustomIcon } from '../components';
 
@@ -15,7 +15,8 @@ export type AppStackParamList = {
     ChatDetailScreen: {
         id: string,
         name: string,
-    }
+    },
+    EditProfileScreen:undefined
 };
 
 export type TabStackParamList = {
@@ -78,6 +79,7 @@ export const AppStackNavigator = () => {
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} />
+            <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         </Stack.Navigator>
     );
 };
