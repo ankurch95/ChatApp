@@ -8,6 +8,7 @@ import socket from "../../utils/socket";
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from "@gorhom/bottom-sheet";
 import { Input, Stack, useToast } from "native-base";
 import { Toast } from "../../components/Toast";
+import { useFocusEffect } from "@react-navigation/native";
 
 
 export const ChatScreen = () => {
@@ -45,9 +46,13 @@ export const ChatScreen = () => {
     const handleSheetChanges = useCallback((index: number) => {
         console.log('handleSheetChanges', index);
     }, []);
-    useLayoutEffect(() => {
-        fetchGroups();
-    }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            const unsubscribe = fetchGroups()
+            return () => unsubscribe;
+        }, [])
+    );
 
 
     const fetchGroups = () => {

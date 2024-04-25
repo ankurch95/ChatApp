@@ -7,6 +7,7 @@ import {
 import { AuthScreen, SplashScreen, ChatScreen, ChatDetailScreen, ProfileScreen, UpdateScreen, EditProfileScreen } from '../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CustomIcon } from '../components';
+import { ChatSettingScreen } from '../screens/profile/chatSetting';
 
 export type AppStackParamList = {
     AuthScreen: undefined;
@@ -16,7 +17,8 @@ export type AppStackParamList = {
         id: string,
         name: string,
     },
-    EditProfileScreen:undefined
+    EditProfileScreen:undefined,
+    ChatSettingScreen:undefined
 };
 
 export type TabStackParamList = {
@@ -80,6 +82,8 @@ export const AppStackNavigator = () => {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="ChatDetailScreen" component={ChatDetailScreen} />
             <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+            <Stack.Screen name="ChatSettingScreen" component={ChatSettingScreen} />
+
         </Stack.Navigator>
     );
 };

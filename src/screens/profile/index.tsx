@@ -122,7 +122,9 @@ export const ProfileScreen = () => {
             </View>
           </View>
           <Divider marginY={3} />
-          <View style={{ flexDirection: 'row' }}>
+          <Pressable
+            style={{ flexDirection: 'row' }}
+            onPress={() => navigation.navigate('ChatSettingScreen')}>
             <CustomIcon
               name='chat-outline' color={'black'} size={5} />
             <View style={{ marginLeft: 15 }}>
@@ -130,7 +132,7 @@ export const ProfileScreen = () => {
                 Chat
               </Typography>
             </View>
-          </View>
+          </Pressable>
         </Box>
 
 

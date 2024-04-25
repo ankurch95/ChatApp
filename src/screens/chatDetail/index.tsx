@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { View, TextInput, Text, FlatList, Pressable, SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./styles";
@@ -12,7 +12,10 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
     const [message, setMessage] = useState("");
     const [user, setUser] = useState("");
     const { name, id } = route.params;
+    const flatListRef = useRef<FlatList<any>>();
 
+    // however you detect new items
+    flatListRef?.current?.scrollToEnd();
     const getUsername = async () => {
         try {
             const value = await AsyncStorage.getItem("username");
@@ -37,23 +40,27 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
     }, [socket]);
 
     const handleNewMessage = () => {
-        const hour =
-            new Date().getHours() < 10
-                ? `0${new Date().getHours()}`
-                : `${new Date().getHours()}`;
+        if (message) {
 
-        const mins =
-            new Date().getMinutes() < 10
-                ? `0${new Date().getMinutes()}`
-                : `${new Date().getMinutes()}`;
 
-        if (user) {
-            socket.emit("newMessage", {
-                message,
-                room_id: id,
-                user,
-                timestamp: { hour, mins },
-            });
+            const hour =
+                new Date().getHours() < 10
+                    ? `0${new Date().getHours()}`
+                    : `${new Date().getHours()}`;
+
+            const mins =
+                new Date().getMinutes() < 10
+                    ? `0${new Date().getMinutes()}`
+                    : `${new Date().getMinutes()}`;
+
+            if (user) {
+                socket.emit("newMessage", {
+                    message,
+                    room_id: id,
+                    user,
+                    timestamp: { hour, mins },
+                });
+            }
         }
     };
 
@@ -70,7 +77,9 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
                 >
                     {chatMessages[0] ? (
                         <FlatList
+                            ref={flatListRef}
                             data={chatMessages}
+                            showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}
                             renderItem={({ item }) => (
                                 <MessageComponent
@@ -92,7 +101,7 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
 
                     <AnimatedButton
                         title="Send"
-                        bg='green.800'
+                        bg={message != '' ? 'green.800' : 'gray.300'}
                         onPress={handleNewMessage}
                     />
                 </View>
