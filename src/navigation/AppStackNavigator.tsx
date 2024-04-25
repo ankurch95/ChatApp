@@ -44,13 +44,13 @@ const Home = () => {
                 tabBarActiveTintColor: '#2563eb',
                 tabBarInactiveTintColor: 'gray'
             }}>
-            <Tab.Screen
+            {/* <Tab.Screen
                 options={{
                     tabBarLabel: 'Updates',
                     tabBarIcon: ({ focused }) => <CustomIcon name='update' size={6} color={focused ? 'blue.600' : 'gray.500'} />
                 }}
                 name="UpdateScreen"
-                component={UpdateScreen} />
+                component={UpdateScreen} /> */}
             <Tab.Screen
                 options={{
                     tabBarLabel: 'Chats',
