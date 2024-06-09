@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
         width: "100%",
         padding: 20,
         justifyContent: "center",
-        marginBottom: 15,
         elevation: 2,
     },
     chatHeader: {
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     chatListContainer: {
-        paddingHorizontal: 10,
+        flex:1,
     },
     chatEmptyContainer: {
         width: "100%",
@@ -39,7 +38,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 30
     },
     bottomSheetContainer: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
     },
     contentContainer: {

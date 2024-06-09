@@ -41,8 +41,7 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
 
     const handleNewMessage = () => {
         if (message) {
-
-
+            setMessage('')
             const hour =
                 new Date().getHours() < 10
                     ? `0${new Date().getHours()}`
@@ -94,6 +93,7 @@ export const ChatDetailScreen = ({ route, navigation }: AppStackScreenProps<'Aut
 
                 <View style={styles.messagingInputContainer}>
                     <TextInput
+                        value={message}
                         placeholder="Type Message"
                         style={styles.messagingInput}
                         onChangeText={(value) => setMessage(value)}

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "white",
     },
     messagingScreen: {
         flex: 1,
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
         width: '70%',
         marginRight: 10,
         borderRadius: 10,
-        backgroundColor: '#CACACA'
+        backgroundColor: '#F7F7F7'
     },
     messagingButtonContainer: {
         width: "30%",

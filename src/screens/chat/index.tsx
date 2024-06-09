@@ -87,7 +87,8 @@ export const ChatScreen = () => {
                         renderItem={({ item }) => <ChatComponent item={item} />}
                         keyExtractor={(item) => item.id}
                     />
-                ) : (
+                ) 
+                : (
                     <View style={styles.chatEmptyContainer}>
                         <Typography
                             variant="bigText">
